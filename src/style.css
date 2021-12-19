@@ -1,0 +1,13 @@
+.MuiGrid-container{
+height: 65vh;
+}
+
+.MuiToolbar-regular{
+   background-color: rgb(223, 124, 12);
+   color: rgb(64, 64, 68);
+}
+
+footer{
+   background-color: rgb(163, 93, 13);
+    
+}
