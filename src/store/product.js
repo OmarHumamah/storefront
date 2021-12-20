@@ -5,7 +5,7 @@ let initialState = {
       name: 'Smart TV 42"',
       price: 599,
       description: 'Smart tv with android 11 os and with size 42"',
-      inventory: 1
+      inventory: 3
     },
     {
       category: 'Phons',
@@ -40,25 +40,43 @@ let initialState = {
       name: 'I Watch',
       price: 369,
       description: 'I Watch watch smart watch for I fruit phones 4G ram',
-      inventory: 6
+      inventory: 4
     },
 
   ],
 }
 
 const prodReducer = (state = initialState, action) => {
-  let { type } = action;
+  let { type, payload } = action;
 
   switch (type) {
-    case 'SETCATEGORY':
-      let products = initialState.products;
-      return { products };
+    case 'GETALLPRODUCTS':
+      return { products: initialState.products };
 
-    case 'RESET':
-      return initialState;
+    case 'ADDTOCART':
+      const updateInventory = state.products.map(product => {
+        if (product === payload){
+          return {...product, inventory: product.inventory - 1}
+        }
+        return product;
+      })
+      return {products: updateInventory};
 
     default:
       return state;
+  }
+}
+
+export const getAllProds = () => {
+  return {
+    type: 'GETALLPRODUCTS'
+  }
+}
+
+export const setActiveProds = (category) => {
+  return {
+    type: 'SETCATEGORY',
+    payload: category
   }
 }
 
